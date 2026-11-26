@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub RU — Русификатор GitHub.com",
+  "version": "1.0.0",
+  "description": "Русская локализация интерфейса GitHub.com и Gist с мгновенным переключателем EN | RU. Не трогает код и README.",
+  "author": "prud (PrudnikovMS)",
+  "homepage_url": "https://github.com/PrudnikovMS/github-ru",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://github.com/*",
+    "https://gist.github.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*",
+        "https://gist.github.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "GitHub RU (EN | RU)",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "github-ru@prudnikovms.github.io",
+      "strict_min_version": "109.0"
+    }
+  }
+}
