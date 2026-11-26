@@ -105,10 +105,24 @@ npm test        # Прогнать синтаксические и модуль�
 
 ---
 
+## ❓ Частые вопросы: обновления и безопасность
+
+- **Не сломает ли это сайт `github.com` после обновлений?**  
+  Нет. Движок в [`src/core/dom-engine.js`](src/core/dom-engine.js) не перестраивает DOM и не трогает `innerHTML` — он аккуратно меняет только существующие текстовые узлы и атрибуты `placeholder`/`title`/`aria-label`. Если на GitHub появятся новые кнопки, они просто останутся на английском до обновления словаря (в Tampermonkey обновления подтягиваются автоматически через `@updateURL`).
+
+- **Не сломает ли это GitHub Desktop после автообновления?**  
+  Нет. При обновлении GitHub Desktop (Squirrel) создаёт новую папку `app-3.x.x` с чистым оригинальным `index.html`. Приложение продолжит работать штатно (просто снова на английском), а вернуть перевод можно за 2 секунды запуском [`apply.ps1`](apply.ps1). Перед патчем всегда сохраняется резервная копия `index.html.bak`, и скрипт не изменяет файл, если структура изменилась.
+
+- **Может ли перевестись мой код, README или названия веток?**  
+  Нет. Блоки кода, диффы, Markdown-файлы, поля ввода, имена файлов, веток и репозиториев жёстко исключены из перевода, а переключатель **`EN | RU`** мгновенно возвращает оригинальные строки из памяти.
+
+---
+
 ## 🇬🇧 English Summary
 
 **GitHub RU** is an open-source, zero-dependency Russian localization suite for **GitHub Desktop** (Windows) and **GitHub.com** (Manifest V3 Browser Extension & Tampermonkey Userscript).  
-It preserves code blocks, diffs, Markdown READMEs, repository/branch names, and user inputs untouched, and provides an instant **`EN | RU`** toggle.
+- Preserves code blocks, diffs, Markdown READMEs, repository/branch names, and user inputs untouched, with an instant **`EN | RU`** toggle.
+- Safe across updates and instant rollback: never alters DOM structure or `innerHTML` on `github.com`, keeps a clean `index.html.bak` backup in GitHub Desktop, and includes one-command reapply (`apply.ps1`) and uninstall (`uninstall.ps1`).
 
 ---
 
